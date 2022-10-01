@@ -1,0 +1,15 @@
+version: "3"
+
+services:
+        darkshell:
+                restart: always
+                container_name: darkshell
+                hostname: darkshell
+                build:
+                        dockerfile: ./devops/Dockerfile
+                        context: ../
+                ports:
+                        - "22222:22"
+                volumes:
+                        - "./ssh:/var/lib/tor/ssh"
+
