@@ -2,7 +2,7 @@ Use this tool to deploy an SSH service and make it accessible through Tor.
 
 ## Usage (server)
 
-Install Docker:
+Install `docker`:
 
 ```bash
 apt install docker.io docker-compose -y
@@ -22,7 +22,7 @@ docker-compose -f ./devops/docker-compose.yml build
 docker-compose -f ./devops/docker-compose.yml up --detach
 ```
 
-Once the server starts, you should see the onion hostname printed on the logs.
+Once the server starts, you should see the onion hostname printed in the logs.
 
 Note: you can use the following command for reading the logs:
 
