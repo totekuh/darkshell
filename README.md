@@ -11,8 +11,8 @@ apt install docker.io docker-compose -y
 Optional step - set SSH credentials (darkshell will use default ones if you omit this step):
 
 ```bash
-export DARKSHELL_USER="your_username"
-export DARKSHELL_PASS="your_pass"
+export DARKSHELL_USER="scrubbed"
+export DARKSHELL_PASS="scrubbed"
 ```
 
 Build and run darkshell:
@@ -27,10 +27,34 @@ Once the server starts, you should see the onion hostname printed in the logs.
 Note: you can use the following command for reading the logs:
 
 ```bash
-docker logs darkshell
+$ docker logs darkshell
+...
+invoke-rc.d: policy-rc.d denied execution of restart.
+ * Restarting OpenBSD Secure Shell server sshd
+   ...done.
+ * Starting tor daemon...
+   ...done.
+---
+darkshell has been initialized
+
+Hostname: scrubbed.onion
+
+SSH command: torsocks ssh hexenbucht@scrubbed.onion
+Password: hexenbucht
+
+---
+You may want to add the following entry to your client's SSH config:
+
+# Media host as Tor hidden service
+host hidden
+  hostname h5daobfr6mydsl2hzgh63peuhlz734hb3wiep57356vooxlz7bmgopad.onion
+  Compression yes
+  Protocol 2
+  PreferredAuthentications password
+  proxyCommand ncat --proxy 127.0.0.1:9050 --proxy-type socks5 %h %p
 ```
 
-Tor might need a few minutes before it makes your service available.
+You might need to wait a few minutes before darkshell becomes reachable.
 
 ## Usage (client)
 
