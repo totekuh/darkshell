@@ -1,6 +1,4 @@
-## General Information
-
-Use this tool to deploy an SSH service accessible via Tor.
+Use this tool to deploy an SSH service and make it accessible through Tor.
 
 ## Usage (server)
 
@@ -19,7 +17,16 @@ Note: you can use the following command for reading the logs:
 docker logs darkshell
 ```
 
+Tor might need a few minutes before it makes your service available.
+
 ## Usage (client)
+
+Install `tor` and `ncat`:
+
+```bash
+apt update
+apt install tor ncat -y
+```
 
 Start the Tor service:
 
@@ -33,10 +40,12 @@ Add the following statement with the hostname to your local SSH config (`~/.ssh/
 # Media host as Tor hidden service
 host hidden
    hostname <your_onion_hostname>
+   Compression yes
+   Protocol 2
    proxyCommand ncat --proxy 127.0.0.1:9050 --proxy-type socks5 %h %p
 ```
 
-Access the service via Tor:
+Access the service via Tor using the password `hexenbucht`:
 
 ```bash
 ssh hexenbucht@hidden

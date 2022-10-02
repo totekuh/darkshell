@@ -26,6 +26,18 @@ echo
 echo "SSH command: torsocks ssh $USER@$HOST"
 echo "Password: $PASS"
 
+echo
+echo "---"
+echo "You may want to add the following entry to your client's SSH config:"
+echo 
+echo "# Media host as Tor hidden service"
+echo "host hidden"
+echo "  hostname $HOST"
+echo "  Compression yes"
+echo "  Protocol 2"
+echo "  proxyCommand ncat --proxy 127.0.0.1:9050 --proxy-type socks5 %h %p"
+
+
 # hang execution
 tail -f /dev/null
 
