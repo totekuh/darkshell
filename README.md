@@ -29,7 +29,6 @@ Note: you can use the following command for reading the logs:
 ```bash
 $ docker logs darkshell
 ...
-invoke-rc.d: policy-rc.d denied execution of restart.
  * Restarting OpenBSD Secure Shell server sshd
    ...done.
  * Starting tor daemon...
