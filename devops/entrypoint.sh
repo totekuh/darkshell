@@ -2,11 +2,25 @@
 
 export RUNLEVEL=1
 
+if [[ -z "${DARKSHELL_USER}" ]]; then
+  USER="hexenbucht"
+else
+  USER="${DARKSHELL_USER}"
+fi
+
+if [[ -z "${DARKSHELL_PASS}" ]]; then
+  PASS="hexenbucht"
+else
+  PASS="${DARKSHELL_PASS}"
+fi
+
 # regenerate host SSH keys
 rm -rf /etc/ssh/ssh_host_*
 dpkg-reconfigure openssh-server
 
 service ssh restart
+
+useradd -m -p $(openssl passwd -1 $PASS) $USER
 
 chown debian-tor:debian-tor /var/lib/tor/ssh
 chown debian-tor:debian-tor /var/lib/tor/ssh -R
@@ -20,6 +34,9 @@ service tor start || exit 1
 # print the Onion hostname
 HOST=$(cat /var/lib/tor/ssh/hostname)
 
+echo "---"
+echo "darkshell has been initialized"
+echo
 echo "Hostname: $HOST"
 
 echo
@@ -35,6 +52,7 @@ echo "host hidden"
 echo "  hostname $HOST"
 echo "  Compression yes"
 echo "  Protocol 2"
+echo "  PreferredAuthentications password"
 echo "  proxyCommand ncat --proxy 127.0.0.1:9050 --proxy-type socks5 %h %p"
 
 

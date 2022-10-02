@@ -12,4 +12,6 @@ services:
                         - "22222:22"
                 volumes:
                         - "./ssh:/var/lib/tor/ssh"
-
+                environment:
+                        - "DARKSHELL_USER=${DARKSHELL_USER}"
+                        - "DARKSHELL_PASS=${DARKSHELL_PASS}"

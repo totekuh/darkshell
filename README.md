@@ -2,7 +2,20 @@ Use this tool to deploy an SSH service and make it accessible through Tor.
 
 ## Usage (server)
 
-Build and run with Docker:
+Install Docker:
+
+```bash
+apt install docker.io docker-compose -y
+```
+
+Optional step - set SSH credentials (darkshell will use default ones if you omit this step):
+
+```bash
+export DARKSHELL_USER="your_username"
+export DARKSHELL_PASS="your_pass"
+```
+
+Build and run darkshell with Docker:
 
 ```bash
 docker-compose -f ./devops/docker-compose.yml build
@@ -39,10 +52,11 @@ Add the following statement with the hostname to your local SSH config (`~/.ssh/
 ```bash
 # Media host as Tor hidden service
 host hidden
-   hostname <your_onion_hostname>
-   Compression yes
-   Protocol 2
-   proxyCommand ncat --proxy 127.0.0.1:9050 --proxy-type socks5 %h %p
+  hostname <your_onion_hostname>
+  Compression yes
+  Protocol 2
+  PreferredAuthentications password
+  proxyCommand ncat --proxy 127.0.0.1:9050 --proxy-type socks5 %h %p
 ```
 
 Access the service via Tor using the password `hexenbucht`:
