@@ -2,7 +2,7 @@ Use this tool to deploy an SSH service and make it accessible through Tor.
 
 ## Usage (server)
 
-Install `docker`:
+Install `docker` and `docker-compose`:
 
 ```bash
 apt install docker.io docker-compose -y
@@ -15,7 +15,7 @@ export DARKSHELL_USER="your_username"
 export DARKSHELL_PASS="your_pass"
 ```
 
-Build and run darkshell with Docker:
+Build and run darkshell:
 
 ```bash
 docker-compose -f ./devops/docker-compose.yml build
