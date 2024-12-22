@@ -14,13 +14,15 @@ else
   PASS="${DARKSHELL_PASS}"
 fi
 
+service chatapp restart || echo "Failed to start the chat app"
+
 # regenerate host SSH keys
 rm -rf /etc/ssh/ssh_host_*
 dpkg-reconfigure openssh-server
 
 service ssh restart
 
-useradd -m -p $(openssl passwd -1 $PASS) $USER
+useradd -m -p $(openssl passwd -1 "$PASS") "$USER"
 
 chown debian-tor:debian-tor /var/lib/tor/ssh
 chown debian-tor:debian-tor /var/lib/tor/ssh -R

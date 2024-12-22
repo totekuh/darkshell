@@ -1,3 +1,10 @@
 HiddenServiceDir /var/lib/tor/ssh
 HiddenServicePort 22 127.0.0.1:22
 
+# Exclude Germany (DE) from all Tor routing
+ExcludeNodes {de}
+ExcludeExitNodes {de}
+
+# Ensure the excluded nodes aren't used even in case of failure
+StrictNodes 1
+
